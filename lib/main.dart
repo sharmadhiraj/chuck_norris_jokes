@@ -1,7 +1,6 @@
-import 'package:flutter_web/material.dart';
-
-import 'data.dart';
-import 'home.dart';
+import 'package:chuck_norris_jokes/data.dart';
+import 'package:chuck_norris_jokes/home.dart';
+import 'package:flutter/material.dart';
 
 void main() {
   runApp(App());

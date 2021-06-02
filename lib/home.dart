@@ -1,6 +1,6 @@
 import 'dart:convert';
 
-import 'package:flutter_web/material.dart';
+import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 
 import 'data.dart';
@@ -12,20 +12,12 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-  Future<Joke> _future;
-
-  @override
-  void initState() {
-    super.initState();
-    _future = fetchJoke();
-  }
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(title: Text(appName)),
       body: FutureBuilder(
-        future: _future,
+        future: fetchJoke(),
         builder: (BuildContext context, AsyncSnapshot<Joke> snapshot) {
           return snapshot.connectionState == ConnectionState.done
               ? snapshot.hasData
@@ -34,29 +26,26 @@ class _HomePageState extends State<HomePage> {
                         mainAxisAlignment: MainAxisAlignment.center,
                         crossAxisAlignment: CrossAxisAlignment.center,
                         children: [
-                          Image.network(snapshot.data.avatar),
+                          Image.network(snapshot.data!.avatar),
                           Padding(
                             padding: const EdgeInsets.all(24),
                             child: Text(
-                              snapshot.data.content,
+                              snapshot.data!.content,
                               style: TextStyle(fontSize: 24),
                             ),
                           ),
                           RaisedButton(
-                            onPressed: () => setState(() {
-                              _future = fetchJoke();
-                            }),
+                            onPressed: () => setState(() => {}),
                             child: Text('Another Joke'),
                           )
                         ],
                       ),
                     )
                   : InkWell(
+                      onTap: () => setState(() => {}),
                       child: Center(
-                          child: Text('Failed to connect ! Tap to retry !!')),
-                      onTap: () => setState(() {
-                        _future = fetchJoke();
-                      }),
+                        child: Text('Failed to connect ! Tap to retry !!'),
+                      ),
                     )
               : Center(child: CircularProgressIndicator());
         },
@@ -66,7 +55,7 @@ class _HomePageState extends State<HomePage> {
 
   Future<Joke> fetchJoke() async {
     var url = 'https://api.chucknorris.io/jokes/random?category=dev';
-    var response = await http.get(url);
+    var response = await http.get(Uri.parse(url));
     return Joke.fromJson(json.decode(response.body));
   }
 }
