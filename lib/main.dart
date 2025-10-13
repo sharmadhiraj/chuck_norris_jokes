@@ -1,12 +1,14 @@
-import 'package:chuck_norris_jokes/util/data.dart';
 import 'package:chuck_norris_jokes/screens/home.dart';
+import 'package:chuck_norris_jokes/util/data.dart';
 import 'package:flutter/material.dart';
 
 void main() {
-  runApp(App());
+  runApp(ChuckNorrisJokesApp());
 }
 
-class App extends MaterialApp {
+class ChuckNorrisJokesApp extends MaterialApp {
+  const ChuckNorrisJokesApp({super.key});
+
   @override
   String get title => appName;
 
