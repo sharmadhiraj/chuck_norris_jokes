@@ -1,16 +1,17 @@
 class Joke {
-  final String avatar;
+  const Joke({required this.id, required this.content});
+
+  final String id;
   final String content;
 
-  Joke(
-    this.avatar,
-    this.content,
-  );
-
   factory Joke.fromJson(Map<String, dynamic> json) {
-    return Joke(
-      json["icon_url"],
-      json["value"],
-    );
+    return Joke(id: json["id"] as String, content: json["value"] as String);
   }
+
+  static List<Joke> parseList(dynamic list) {
+    if (list is! List) return const [];
+    return [for (final dynamic json in list) Joke.fromJson(json)];
+  }
+
+  Map<String, dynamic> toJson() => {"id": id, "value": content};
 }

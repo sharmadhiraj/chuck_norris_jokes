@@ -1,23 +1,31 @@
-import 'package:chuck_norris_jokes/screens/home.dart';
-import 'package:chuck_norris_jokes/util/data.dart';
+import 'package:chuck_norris_jokes/features/jokes/jokes_screen.dart';
+import 'package:chuck_norris_jokes/data/favorite_jokes_store.dart';
 import 'package:flutter/material.dart';
 
-void main() {
-  runApp(ChuckNorrisJokesApp());
+Future<void> main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await FavoriteJokesStore.instance.load();
+  runApp(const ChuckNorrisJokesApp());
 }
 
-class ChuckNorrisJokesApp extends MaterialApp {
+class ChuckNorrisJokesApp extends StatelessWidget {
   const ChuckNorrisJokesApp({super.key});
 
   @override
-  String get title => appName;
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      title: "Chuck Norris Jokes",
+      debugShowCheckedModeBanner: false,
+      theme: _buildTheme(Brightness.light),
+      darkTheme: _buildTheme(Brightness.dark),
+      home: const JokesScreen(),
+    );
+  }
 
-  @override
-  ThemeData get theme => ThemeData(
-        primarySwatch: Colors.blue,
-        useMaterial3: false,
-      );
-
-  @override
-  Widget get home => HomePage();
+  ThemeData _buildTheme(Brightness brightness) {
+    return ThemeData(
+      colorSchemeSeed: Colors.deepOrange,
+      brightness: brightness,
+    );
+  }
 }
