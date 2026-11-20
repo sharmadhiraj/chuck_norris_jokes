@@ -13,3 +13,5 @@ doc/api/
 .vscode
 
 **/.DS_Store
+.flutter-plugins-dependencies
+*.iml
