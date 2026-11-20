@@ -1,12 +1,12 @@
 {
-    "name": "chuck_norris_jokes",
-    "short_name": "chuck_norris_jokes",
+    "name": "Chuck Norris Jokes",
+    "short_name": "Chuck Jokes",
     "start_url": ".",
     "display": "standalone",
-    "background_color": "#0175C2",
-    "theme_color": "#0175C2",
-    "description": "A new Flutter project.",
-    "orientation": "portrait-primary",
+    "background_color": "#FF5722",
+    "theme_color": "#FF5722",
+    "description": "Random Chuck Norris jokes by category.",
+    "orientation": "any",
     "prefer_related_applications": false,
     "icons": [
         {
