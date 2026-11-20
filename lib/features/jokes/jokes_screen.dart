@@ -38,6 +38,7 @@ class _JokesScreenState extends State<JokesScreen> {
         children: [
           _buildCategories(),
           Expanded(child: _buildJoke()),
+          _buildNextButton(),
         ],
       ),
     );
@@ -91,33 +92,44 @@ class _JokesScreenState extends State<JokesScreen> {
   }
 
   Widget _buildLoadedJoke(Joke joke) {
+    return Center(
+      child: SingleChildScrollView(
+        padding: const EdgeInsets.all(24),
+        child: ConstrainedBox(
+          constraints: const BoxConstraints(maxWidth: 560),
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              Text(
+                joke.content,
+                textAlign: TextAlign.center,
+                style: Theme.of(context).textTheme.headlineSmall,
+              ),
+              const SizedBox(height: 24),
+              JokeActions(joke: joke),
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+
+  Widget _buildNextButton() {
     return SafeArea(
-      child: Center(
-        child: SingleChildScrollView(
-          padding: const EdgeInsets.all(24),
-          child: ConstrainedBox(
-            constraints: const BoxConstraints(maxWidth: 560),
-            child: Column(
-              mainAxisSize: MainAxisSize.min,
-              children: [
-                Text(
-                  joke.content,
-                  textAlign: TextAlign.center,
-                  style: Theme.of(context).textTheme.headlineSmall,
-                ),
-                const SizedBox(height: 24),
-                JokeActions(joke: joke),
-                const SizedBox(height: 16),
-                Semantics(
-                  button: true,
-                  label: "Next joke",
-                  child: FilledButton.icon(
-                    onPressed: () => setState(_loadJoke),
-                    icon: const Icon(Icons.refresh),
-                    label: const Text("Next joke"),
-                  ),
-                ),
-              ],
+      child: Padding(
+        padding: const EdgeInsets.fromLTRB(24, 8, 24, 24),
+        child: ConstrainedBox(
+          constraints: const BoxConstraints(maxWidth: 560),
+          child: Semantics(
+            button: true,
+            label: "Next joke",
+            child: FilledButton.icon(
+              onPressed: () => setState(_loadJoke),
+              icon: const Icon(Icons.refresh),
+              label: const Text("Next joke"),
+              style: FilledButton.styleFrom(
+                minimumSize: const Size.fromHeight(52),
+              ),
             ),
           ),
         ),
@@ -126,11 +138,9 @@ class _JokesScreenState extends State<JokesScreen> {
   }
 
   Widget _buildError() {
-    return StateMessage(
+    return const StateMessage(
       icon: Icons.cloud_off,
-      message: "Could not load a joke.",
-      actionLabel: "Try again",
-      onAction: () => setState(_loadJoke),
+      message: "Could not load a joke. Tap Next joke to retry.",
     );
   }
 }

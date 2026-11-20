@@ -20,13 +20,15 @@ class CategoryChips extends StatelessWidget {
         scrollDirection: Axis.horizontal,
         padding: const EdgeInsets.symmetric(horizontal: 16),
         children: [
-          _buildChip(label: "random", category: null),
+          _buildChip(label: "Random", category: null),
           for (final String category in categories)
-            _buildChip(label: category, category: category),
+            _buildChip(label: _capitalize(category), category: category),
         ],
       ),
     );
   }
+
+  String _capitalize(String text) => text[0].toUpperCase() + text.substring(1);
 
   Widget _buildChip({required String label, required String? category}) {
     return Padding(
@@ -37,6 +39,7 @@ class CategoryChips extends StatelessWidget {
         child: ChoiceChip(
           label: Text(label),
           selected: selected == category,
+          showCheckmark: false,
           onSelected: (_) => onSelected(category),
         ),
       ),
