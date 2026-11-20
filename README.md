@@ -4,6 +4,8 @@ Random Chuck Norris jokes by category, with favorites, copy and share. Built wit
 
 **[Live demo](https://sharmadhiraj.github.io/chuck_norris_jokes/)**
 
+<img src="docs/demo.gif" alt="Demo" width="280">
+
 Jokes come from [api.chucknorris.io](https://api.chucknorris.io) (the `explicit` category is excluded).
 
 ## Run
