@@ -12,8 +12,10 @@
 	<string>$(PRODUCT_BUNDLE_IDENTIFIER)</string>
 	<key>CFBundleInfoDictionaryVersion</key>
 	<string>6.0</string>
+	<key>CFBundleDisplayName</key>
+	<string>Chuck Norris Jokes</string>
 	<key>CFBundleName</key>
-	<string>chuck_norris_jokes</string>
+	<string>Chuck Norris Jokes</string>
 	<key>CFBundlePackageType</key>
 	<string>APPL</string>
 	<key>CFBundleShortVersionString</key>
